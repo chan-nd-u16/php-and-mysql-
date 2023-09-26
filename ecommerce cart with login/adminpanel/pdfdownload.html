@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jsPDF/dist"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <div id="content">
+        <h1 style="color: blueviolet;">Hello chandru,pdf downloaded sussesfilly</h1>
+    </div>
+    <button onclick="func()">download</button>
+</body>
+</html>
+<script>
+
+function func(){
+window.jsPDF=window.jspdf.jsPDF;
+var doc=new jsPDF();
+var element=document.querySelector('#content');
+
+doc.html(
+    element,{
+        callback:function(doc){
+            doc.save('sample.pdf');
+
+    },
+    x:15,
+    y:15,
+    width:170,
+    windowWidth:650
+
+}
+)
+}
+
+
+</script>

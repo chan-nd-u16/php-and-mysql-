@@ -1,5 +1,13 @@
 <?php
-   include('credauth.php')
+   $host='localhost';
+   $username='root';
+   $password='root';
+   $database='ecommerse';
+   $auth=mysqli_connect($host,$username,$password,$database);
+   session_start();
+  if(!isset($_SESSION['name'])){
+    header("location:adminlogin.php");
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,28 +19,33 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
+<H3 style="text-align: center;">USER DETAILS</H3>
 
     <form id="myform">
-        <input type="text" name="search" id="string" placeholder="search" class="form-control" style="width:60%;margin:auto;">
+        <!-- <h3 style="margin-left: 25%;">SEARCH</h3> -->
+        <input type="text" name="search" id="string" placeholder="search" class="form-control" style="width:50%;margin:auto;">
         <!-- <input type="submit" value="search" class="btn btn-primary"> -->
 
     </form>
     <div id="cat"></div>
-    <table class="table">
+    
+    <table class="table table-striped" >
        <thead>
         <tr>
-             <th>id</th>
+             <th>Id</th>
             <th>Name</th>
-            <th>Age</th>
+            <th>Username</th>
+            <th>Profile</th>
+            <th>Phone</th>
             <th>Email</th>
-            <th>Update</th>
-            <th>Delete</th>            
+            <th>password</th>
+                     
 
         </tr>
        </thead>
        <tbody>
           <?php
-            $query="SELECT * FROM  `data`";
+            $query="SELECT * FROM  `newuserdata`";
             $sel=mysqli_query($auth,$query);
             
             
@@ -40,12 +53,15 @@
                     $one=mysqli_fetch_array($sel);
         ?>
                 <tr>
-                    <td><?php echo $one['id'];?></td>
-                    <td><?php echo $one['name'];?></td>
-                    <td><?php echo $one['age'];?></td>
-                    <td><?php echo $one['email'];?></td>
-                    <td><a href="update.php?id=<?php print($one['id']);?>&name=<?php print($one['name']);?>&age=<?php print($one['age']);?>&email=<?php print($one['email']);?>" class="btn btn-primary">update</a></td>
-                    <td><a href="delete.php?id=<?php print($one['id'])?>" class="btn btn-danger">Delete</a></td>
+                    <td class="align-middle"><?php echo $one['id'];?></td>
+                    <td class="align-middle"><?php echo $one['name'];?></td>
+                    <td class="align-middle"><?php echo $one['username'];?></td>
+                    <td class="align-middle"><img src="images/<?php echo $one['profile'];?>" alt="" style="height: 100px;width: 100px;"></td>
+                    <td class="align-middle"><?php echo $one['phone'];?></td>
+                    <td class="align-middle"><?php echo $one['email'];?></td>
+                    <td class="align-middle"><?php echo $one['password'];?></td>
+                    
+                    
 
                 </tr>
 
@@ -62,7 +78,7 @@
          
        </tbody>
     </table>
-    <a href="create.php" class="btn btn-primary">Add New</a>
+    <!-- <a href="create.php" class="btn btn-primary">Add New</a> -->
 </body>
 </html>
 <script>

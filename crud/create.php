@@ -18,6 +18,7 @@
     <input type="text" name="age" placeholder="age"  class="form-control">
     <input type="text" name="email" placeholder="email"  class="form-control">
     <input type="submit" value="submit" name="submit"  class="btn btn-primary">
+    <input type="range" value="range">
 
 
     </form>

@@ -114,7 +114,21 @@ $pa=$_GET['pas'];
 $find="SELECT username FROM newuserdata WHERE username = '$u_name'";
 $call=mysqli_query($auth,$find);
 $call1=mysqli_fetch_array($call)[0];
-if(mysqli_num_rows($call)>0){
+
+
+
+$adq="SELECT username FROM `admin` WHERE username = '$u_name'";
+$admincall=mysqli_query($auth,$adq);
+$adminusername=mysqli_fetch_array($admincall)[0];
+$adqp="SELECT password FROM `admin` WHERE username='$adminusername'";
+$admincall1=mysqli_query($auth,$adqp);
+$adminpassword=mysqli_fetch_array($admincall1);
+
+if(($u_name==$adminusername)&&($pa==$adminpassword)){
+    header("location:http://localhost/myphpPograms/ecommerce%20task/ecommerce%20cart%20with%20login/adminpanel/adminpanel.php");
+
+}
+else if(mysqli_num_rows($call)>0){
     $u="SELECT password FROM newuserdata WHERE username='$call1'";
     
     // $check=mysqli_fetch_assoc($call);
