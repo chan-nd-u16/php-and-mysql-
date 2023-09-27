@@ -102,7 +102,7 @@
     </style>
 </head>
 <body>
-<h2 style="text-align: center;"> ADMIN LOGIN PAGE</h2>
+<h2 style="text-align:center;">ADMIN LOGIN PAGE</h2>
     <div class="formcontainer">
         
 
