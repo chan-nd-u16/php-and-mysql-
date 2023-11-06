@@ -118,7 +118,7 @@
 
             <form method="post">
                 <div class="email"><i class="fa-solid fa-envelope fa-fade"></i><input type="email" name="email" id="" placeholder="Email " style="padding-left: 21px; " ></div>
-                <div class="password"><i class="fa-solid fa-lock fa-beat"></i><input type="text" name="password" id="" placeholder="Password" style="padding-left: 21px; "></div>
+                <div class="password"><i class="fa-solid fa-lock fa-beat"></i><input type="password" name="password" id="" placeholder="Password" style="padding-left: 21px; "></div>
                 <div class="buttons">
                 <div class="button"><input type="submit" name="submit" value="Log in"></div>
                 <div class="buttonn"><input  type="submit" name="signin" value="Create account"></div>
@@ -166,13 +166,26 @@ if(isset($_POST['submit'])){
     // if($mailcheck->num_rows>0){
         $find=mysqli_query($auth,"SELECT * FROM `admin` WHERE email='$email' AND password ='$pass'");
         if($find->num_rows>0){
+
             $thatrow=mysqli_fetch_array($find);
             if($thatrow['email']==$email){
                 if($thatrow['password']==$pass){
                     session_start();
                     $_SESSION['email']=$email;
-                    echo $_SESSION['email'];
+                    // echo $_SESSION['email'];
                     $_SESSION['name']=mysqli_fetch_array(mysqli_query($auth,"SELECT admin.name from `admin` where email='$email' and password='$pass'"))['name'];
+
+
+
+
+                    $admin_name=$_SESSION['name'];
+                    $admin_check=mysqli_query($auth,"SELECT * FROM `admin` WHERE name='$admin_name'");
+                    if($admin_check->num_rows==0){
+                        header("location:user.php");
+                    }
+
+
+
                     // echo $_SESSION['name'];
                     $_SESSION['profile']="<img src='images/".mysqli_fetch_array(mysqli_query($auth,"SELECT admin.profile FROM `admin` WHERE email='$email' AND password='$pass'"))['profile']."' style='height:100px;width:100px;border-radius:50%;'>";
                     // echo $_SESSION['profile'];

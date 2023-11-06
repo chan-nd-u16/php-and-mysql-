@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+      /* body{
+        background-color: #e6e6fe;
+      } */
+
+        .topic{
+            display: flex;
+            justify-content: center;
+            /* margin-left: 50%; */
+        }
+    </style>
 </head>
 <body>
     
@@ -33,9 +44,31 @@ INNER JOIN products ON products.id=Orders.product_id);";
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
+<style>
+    
+</style>
 <body>
-    <H3 style="text-align: center;background-color:grey;">ORDERS</H3>
-<table class="table table-striped">
+
+
+<div class="container my-5">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb breadcrumb-custom overflow-hidden text-center bg-body-tertiary border rounded-3">
+      <li class="breadcrumb-item">
+        <a class="link-body-emphasis fw-semibold text-decoration-none" href="adminpanel.php">
+          <svg class="bi" width="16" height="16"><use xlink:href="#house-door-fill"></use></svg>
+         Admin Panel
+        </a>
+      </li>
+      <!-- <li class="breadcrumb-item">
+        <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">Library</a>
+      </li> -->
+      <li class="breadcrumb-item active" aria-current="page">
+        Orders
+      </li>
+    </ol>
+  </nav>
+</div>
+<table class="table  table-striped -sm table-hover">
        <thead>
         <tr>
             <th>Customer Id</th>

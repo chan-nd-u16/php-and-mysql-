@@ -38,7 +38,7 @@ $query="SELECT * FROM `products`";
         <input type="text" name="search" id="string" placeholder="search" class="form-control" style="width:50%;margin:auto;">
     </form>
     <div id="cat"></div>
-<table class="table table-striped">
+<table class="table table-striped -sm">
        <thead>
         <tr>
              <th>id</th>
@@ -60,9 +60,13 @@ $query="SELECT * FROM `products`";
             if(!isset($_SESSION['name'])){
                 header("location:adminlogin.php");
               }
-            // if(isset($_SESSION['name'])){
-            //     echo $_SESSION['name'];
-            // }
+              $admin_name=$_SESSION['name'];
+            $admin_check=mysqli_query($auth,"SELECT * FROM `admin` WHERE name='$admin_name'");
+            
+            if($admin_check->num_rows==0){
+                
+                header("location:user.php");
+            }
             $sel=mysqli_query($auth,$query);
             
             

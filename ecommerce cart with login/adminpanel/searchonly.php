@@ -1,4 +1,10 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+
+header('Access-Control-Allow-Methods: POST');
+
+header('Access-Control-Allow-Headers:Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Origin,Access-Control-Allow-Methods,Authorization,X-Requested-With');
+
     $host='localhost';
     $username='root';
     $password='root';
@@ -9,52 +15,58 @@
       
     
 
-    $q="SELECT * FROM `newuserdata`
-    WHERE name LIKE '$r%';";
+    $q="SELECT * FROM `products`
+    WHERE productname LIKE '$r%';";
 
     $ar=mysqli_query($auth,$q);
 
-    echo "<table class='table'>
+    echo "<table class='table table-striped'>
     <thead>
      <tr>
           <th>id</th>
-         <th>Name</th>
-         <th>Username</th>
-         <th>profile</th>
-         <th>Phone</th>
-         <th>Email</th>
-         <th>Password</th>
-         <th>Update</th>
-         <th>Delete</th> 
-
+         <th>Product Name</th>
+         
+         <th>Product Image</th>
+         <th>Product Description</th>
+         <th>Product Price</th>
+         <th>Stock Status</th>
+         <th>quantity</th>
+         
+                  
 
      </tr>
     </thead>
     <tbody>";
 while($one=mysqli_fetch_array($ar)){
 //    echo '$one['id']'
+if($one==null){
+  echo 'no match';
+}else{
+
 
 
     echo "
      
     <tr>
     <td class='align-middle'>$one[id]</td>
-    <td class='align-middle'>$one[name]</td>
-    <td class='align-middle'>$one[username]</td>
-    <td><img src='images/$one[profile]' style='height:150px;width: 150px;'></td>
-    <td class='align-middle'>$one[phone]</td>
-    <td class='align-middle'>$one[email]</td>
-    <td class='align-middle'>$one[password]</td>
-    <td class='align-middle'><a href='customerupdate.php?id=$one[id]&name=$one[name]&uname=$one[username]&phone=$one[phone]&email=$one[email]&password=$one[password]' class='btn btn-primary'>update</a></td>
-    <td class='align-middle'><a href='customerdelete.php?id=$one[id]' class='btn btn-danger'>Delete</a></td>
+    <td class='align-middle'>$one[productname]</td>
+    
+    <td><img src='http://localhost/myphpPograms/ecommerce%20task/ecommerce%20cart%20with%20login/adminpanel/images/$one[productimage]' style='height:100px;width: 100px;'></td>
+    <td class='align-middle'>$one[productdesc]</td>
+    <td class='align-middle'>$one[productprice]</td>
+    <td class='align-middle'>$one[stockstatus]</td>
+    <td class='align-middle'>$one[quantity]</td>
 
-   
+    
 
 </tr>
 ";
 }
+}
  
-    }
+}
+
+    
 echo"</tbody>
 </table>"
 ?>

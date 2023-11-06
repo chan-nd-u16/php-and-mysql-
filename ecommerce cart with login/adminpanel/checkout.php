@@ -4,12 +4,53 @@ session_start();
 include('credauth.php');
 $totalquantity=0;
 $products="";
+$totalpriceincart=0;
+
+        $_SESSION['orderid']=0;
+        // include('credauth.php');
+        if(isset($_POST['submit'])){
+          $orderid=rand(1000000,99999999);
+          $name=$_POST['name'];
+          $email=$_POST['email'];
+          $adress=$_POST['address'];
+          $country=$_POST['country'];
+          $state=$_POST['state'];
+          $zip=$_POST['zip'];
+          $userid=$_SESSION['id'];
+          
+          // echo $userid;
+          // echo $orderid;
+          // echo $name;
+          // echo $email;
+          // echo $adress;
+          // echo $country;
+          // echo $state;
+          // echo $zip;
+          
+          // echo $_SESSION['orderid'];
+
+          $insert=mysqli_query($auth,"INSERT INTO orders(id,customer_id,productname,name,email,adress,country,state,zip,quantity,total_price) VALUES($orderid,$userid,'$products','$name','$email','$adress','$country','$state',$zip,$totalquantity,$totalpriceincart)");
+          if($insert){
+            $_SESSION['orderid']=$orderid;
+           header("location:orderproducds.php");
+            
+          }
+
+  
+          
+
+
+        }
+
+
+
+
 
 ?>
 
 <html lang="en" data-bs-theme="auto">
 <head>
-  <!-- <head><script src="../assets/js/color-modes.js"></script> -->
+  <!-- <head><script src="../assets/js/color-modes.js"></script></head> -->
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,13 +61,12 @@ $products="";
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   
-    <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/checkout/"> -->
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/checkout/">
 
-    
-<!-- 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"> -->
+ 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"> 
 
-<!-- <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img{
@@ -196,7 +236,7 @@ $totalpriceincart=0;
 
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
-              <h6 class="my-0"><?php $products.=$cartonerow['productname']; echo $cartonerow['productname'];?></h6>
+              <h6 class="my-0"><?php $products.=$cartonerow['productname'].","; echo $cartonerow['productname'];?></h6>
               <small class="text-body-secondary"><?php $totalquantity+=$cartonerow['quantity_incart']; echo $cartonerow['quantity_incart'];?> </small>
             </div>
             <span class="text-body-secondary">₹<?php $tot=$cartonerow['quantity_incart']*$cartonerow['productprice']; $totalpriceincart+=$tot; echo $tot;?></span>
@@ -393,9 +433,9 @@ $totalpriceincart=0;
 
           <hr class="my-4">
 
-          <input class="mt-3 w-100 btn btn-primary btn-lg" type="submit" name="submit" value="SUBMIT"></input>
+          <input class="mt-3 w-100 btn btn-primary btn-lg" type="submit" name="submit" value="PLACE ORDER"></input>
 
-          <a href="http://localhost/myphpPograms/ecommerce%20task/ecommerce%20cart%20with%20login/adminpanel/orderproducds.php" class="mt-3 w-100 btn btn-primary" style="height: 45px;">PLACE ORDER</a>
+          <!-- <a href="http://localhost/myphpPograms/ecommerce%20task/ecommerce%20cart%20with%20login/adminpanel/orderproducds.php" class="mt-3 w-100 btn btn-primary" style="height: 45px;">PLACE ORDER</a> -->
 
         </form>
       </div>
@@ -411,47 +451,27 @@ $totalpriceincart=0;
     </ul>
   </footer>
 </div>
-<!-- <script src="../assets/dist/js/bootstrap.bundle.min.js"></script> -->
+<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- <script src="checkout.js"></script></body> -->
+    <script src="checkout.js"></script>
+    <script>
+      (() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+    </script>
 </html>
-<?php
-        $_SESSION['orderid']=0;
-        // include('credauth.php');
-        if(isset($_POST['submit'])){
-          $orderid=rand(1000000,99999999);
-          $name=$_POST['name'];
-          $email=$_POST['email'];
-          $adress=$_POST['address'];
-          $country=$_POST['country'];
-          $state=$_POST['state'];
-          $zip=$_POST['zip'];
-          $userid=$_SESSION['id'];
-          
-          // echo $userid;
-          // echo $orderid;
-          // echo $name;
-          // echo $email;
-          // echo $adress;
-          // echo $country;
-          // echo $state;
-          // echo $zip;
-          
-          // echo $_SESSION['orderid'];
-
-          $insert=mysqli_query($auth,"INSERT INTO orders(id,customer_id,productname,name,email,adress,country,state,zip,quantity,total_price) VALUES($orderid,$userid,'$products','$name','$email','$adress','$country','$state',$zip,$totalquantity,$totalpriceincart)");
-          if($insert){
-            $_SESSION['orderid']=$orderid;
-          //  header("location:orderproducds.php");
-            
-          }
-
-  
-          
-
-
-        }
-
-
-
-?>

@@ -1,5 +1,8 @@
 <?php
+// use con\connectionnn;
 include("credauth.php");
+// $obj1=new connectionnn ();
+// $auth=$obj1->conn();
 session_start();
 if(!isset($_SESSION['name'])){
   header("location:userlogin.php");
@@ -29,16 +32,20 @@ if(isset($_POST['logout'])){
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <style>
+      body{
+        background-color: #E0E0E0;
+      }
       
         .header{
           display: flex;
           justify-content: space-between;
           margin-top: 2%;
-          width: 70%;
-          height: 115px;
+          width: 80%;
+          height: 125px;
           background-color:black;
           border-radius: 25px;
           align-items: center;
+          /* margin-top: 20px; */
           margin: auto;
           color: white;
         }
@@ -52,15 +59,7 @@ if(isset($_POST['logout'])){
           display: flex;
           justify-content: center;
           margin-top: 3%;
-          /* height: 700px; */
         }
-        /* .header{
-
-          display: flex;
-          justify-content: space-between;
-          margin-top: 2%;
-
-        } */
         .header .username h4{
           margin-left: 50%;
         }
@@ -74,24 +73,19 @@ if(isset($_POST['logout'])){
         .logout{
           margin-left: 12px; 
         }
-        .main{
-         
-            display: grid;
-            grid-template-columns: 18rem 18rem 18rem;
-            gap:10px;
-            
-        }
         .cardd{
          
           margin: auto;
 
         }
         .cc{
-          height: 27rem;
+          margin: auto;
+          /* height: 27rem; */
 
         }
         .cc:hover{
           background-color: whitesmoke;
+          
         }
        
        .cardd .cc #quantity:active{
@@ -99,33 +93,6 @@ if(isset($_POST['logout'])){
           /* text-decoration: none; */
 
         }
-
-
-        /* span {cursor:pointer; }
-		.number{
-			margin:100px;
-		}
-		.minus, .plus{
-			width:20px;
-			height:20px;
-			background:#f2f2f2;
-			border-radius:4px;
-			padding:8px 5px 8px 5px;
-			border:1px solid #ddd;
-      display: inline-block;
-      vertical-align: middle;
-      text-align: center;
-		}
-		input{
-			height:34px;
-      width: 100px;
-      text-align: center;
-      font-size: 26px;
-			border:1px solid #ddd;
-			border-radius:4px;
-      display: inline-block;
-      vertical-align: middle;
-    } */
     input,
 textarea {
   border: 1px solid #eeeeee;
@@ -209,9 +176,9 @@ input[type="number"]{
 .ch:active{
   background-color: black;
 }
-/* body{
-  background-color: whitesmoke;
-} */
+body{
+  background-color: #E0E0E0;
+}
 
     
     </style>
@@ -270,7 +237,7 @@ input[type="number"]{
         </form>
           
         <!-- </button> -->
-              <i class="siz fa-solid fa-cart-shopping" id="vv" type="submit" data-bs-toggle="offcanvas" name="cart" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="color:black;"></i>
+              <i class="siz fa-solid fa-cart-shopping" id="vv" onclick="backgd()"  type="submit" data-bs-toggle="offcanvas" name="cart" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="color:black;"></i>
 
         <!-- <a
           class="btn btn-dark px-3"
@@ -286,38 +253,13 @@ input[type="number"]{
 </nav>
 <!-- Navbar -->
 
-<!-- <nav class="navbar navbar-dark bg-dark" aria-label="Light offcanvas navbar">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#"></a> -->
-      <!-- <i class="siz fa-solid fa-cart-shopping" id="vv" type="submit" data-bs-toggle="offcanvas" name="cart" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="color:black;"></i> -->
-
-
-
-
-
-      <!-- </div>
-  </nav> -->
-<!-- <i class="fa-solid fa-cart-shopping"></i> -->
-<!-- <form method="post"> -->
-<!-- <input type="submit" name="cart" > -->
-<!-- </form> -->
-
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasRightLabel">CART </h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body" id="cat">
-    <?php
-        // $sqlcall=mysqli_query($auth,"SELECT *
-        // FROM ((cart
-        // INNER JOIN newuserdata ON cart.user_id = newuserdata.id)
-        // INNER JOIN products ON cart.product_id = products.id);");
- 
-        //   while($cartonerow=mysqli_fetch_array($sqlcall)){
-              
-          
-    ?>
+   
     
     
 </div>
@@ -327,10 +269,7 @@ input[type="number"]{
   
 
 
-    <?php
-          // }
-        
-          ?>
+    
     
   </div>
 </div>
@@ -363,7 +302,7 @@ input[type="number"]{
 
                 </div>
         </div> 
-        <div class="main">
+        <div class="main row row-cols-1 row-cols-3 g-3" >
             <?php
             $find=mysqli_query($auth,"SELECT * FROM `products`");
             $findcartid=mysqli_query($auth,"SELECT * FROM `cart`");
@@ -372,6 +311,7 @@ input[type="number"]{
             // $count=1;
             // $cartid=0;
             $cart_id=$_SESSION['id']+23;
+            $_SESSION['cart_id']=$cart_id;
             
             
             
@@ -386,8 +326,8 @@ input[type="number"]{
 
 
             ?>
-            <div class="cardd">
-            <div class="cc card" style="width: 16rem;">
+            <!-- <div class="cardd"> -->
+            <div class="cc card h-100" style="width: 16rem;">
                     <img src="images/<?php echo $onerow['productimage']; ?>" class="card-img-top" alt="..." style="height: 150px;">
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $onerow['productname']; ?></h5>
@@ -414,7 +354,7 @@ input[type="number"]{
                     </div>
                     </div>
 
-            </div>
+            <!-- </div> -->
                     
 
 
@@ -445,25 +385,19 @@ input[type="number"]{
                 // $count++;
               }
             }
-            // if($count>1){ 
-            //     $cart=$secrow['cart_id'];
-            //     mysqli_query($auth,"UPDATE `cart` SET `quantity` = $count WHERE product_id=$product_id");
-            // }
+          
             } 
             ?>
 
         </div>       
 </body>
 <?php
-  // $sql=mysqli_query($auth,"SELECT product_id FROM `cart` WHERE user_id=$userid");
-  // $r=mysqli_fetch_all($sql,MYSQLI_ASSOC);
-  // print_r($r);
+ 
            
 
 ?>
 <script>
 
-// console.log(data)
 
 
   	
@@ -486,7 +420,7 @@ function decrementValue(e) {
   var parent = $(e.target).closest('div');
   var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
 
-  if (!isNaN(currentVal) && currentVal > 0) {
+  if (!isNaN(currentVal) && currentVal > 0){
     parent.find('input[name=' + fieldName + ']').val(currentVal - 1);
   } else {
     parent.find('input[name=' + fieldName + ']').val(0);
@@ -515,7 +449,11 @@ $('#vv').click(function(e){
 
     })
 })
+function backgd(){
+  let bd=document.body
+  bd.style.backgroundColor="#E0E0E0"
 
+}
 
 
 

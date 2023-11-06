@@ -134,21 +134,24 @@ input:checked + .slider:before {
         <form  method="post" enctype="multipart/form-data">
             <!-- <h5>ID</h5> -->
             <input type="text" name="id" id="" value="<?php print ($_GET['id']);?>" class="form-control" style="display:none">
-<h5>PRODUCT NAME</h5>
-            <input type="text" name="productname" id="" placeholder="product name" value="<?php print ($_GET['pname']);?>" class="form-control">
-<h5>PRODUCT DESCRIPTION</h5>
-            <textarea type="text" name="productdesc" id="" placeholder="product description" value="<?php print ($_GET['pdesc']);?>" class="form-control"><?php print ($_GET['pdesc']);?></textarea>
-<h5>PRODUCT IMAGE</h5>
+<h5>NAME</h5>
+            <input type="text" name="name" id="" placeholder="product name" value="<?php print ($_GET['name']);?>" class="form-control">
+<h5>USER NAME</h5>
+            <input type="text" name="uname" id="" placeholder="product name" value="<?php print ($_GET['uname']);?>" class="form-control">
+
+<h5>PHONE</h5>
+            <input type="text" name="phone" id="" placeholder="product description" value="<?php print ($_GET['phone']);?>" class="form-control">
+<h5>PROFILE IMG</h5>
             <input type="file" name="productimg" id=""  class="form-control">
-<h5>PRICE</h5>
-            <input type="text" name="productprice" id="" placeholder="product price"value="<?php print ($_GET['pprice']);?>" class="form-control">
-<h5>STOCK STATUS</h5>
+<h5>EMAIL</h5>
+            <input type="email" name="email" id="" placeholder="product price"value="<?php print ($_GET['email']);?>" class="form-control">
+<!-- <h5>STOCK STATUS</h5>
             <label class="switch">
                 <input type="checkbox" name="checkbox" value="TRUE">
                 <span class="slider round"></span>
-            </label>
-<h5>Quantity</h5>
-            <input type="text" name="quantity" id="" placeholder="Quantity" value="<?php print ($_GET['quantity']);?>" class="form-control">
+            </label> -->
+<h5>PASSWORD</h5>
+            <input type="text" name="password" id="" placeholder="Quantity" value="<?php print ($_GET['password']);?>" class="form-control">
             <input type="submit" name="submit" value="submit" class="btn btn-primary">
         </form>
     </div>
@@ -172,19 +175,21 @@ $targetDir = "images/";
 if(isset($_POST['submit'])){
 
     
-    $pname=$_POST['productname'];
-    $pdesc=$_POST['productdesc'];
-    $price=$_POST['productprice'];
-    $quan=$_POST['quantity'];
+    $name=$_POST['name'];
+    $uname=$_POST['uname'];
+
+    $phone=$_POST['phone'];
+    $email=$_POST['email'];
+    $password=$_POST['password'];
     $Id=$_POST['id'];
-    if(isset($_POST['checkbox'])){
-        $check="INSTOCK";
+    // if(isset($_POST['checkbox'])){
+    //     $check="INSTOCK";
 
 
-      }
-      else{
-        $check="OUT OF STOCK";
-      }
+    //   }
+    //   else{
+    //     $check="OUT OF STOCK";
+    //   }
 
  
 //  $q="UPDATE `products` SET `productname` = '$pname', `productprice` = $price, `quantity` = '$quan' WHERE `id` = $Id";
@@ -203,13 +208,13 @@ if(!empty($_FILES["productimg"]["name"])){
     if(in_array($fileType, array('jpg','png','jpeg','gif'))){
 
     if(move_uploaded_file($_FILES["productimg"]["tmp_name"], $targetFilePath)){
-      $insert = mysqli_query($auth,"UPDATE `products` SET `productname` = '$pname',`productdesc`='$pdesc',`productimage`='$fileName',`productprice` = '$price',`stockstatus`='$check',`quantity` = '$quan',`last_modified`='$user_name' WHERE `id` = $Id");
+      $insert = mysqli_query($auth,"UPDATE `newuserdata` SET `name` = '$name',`username`='$uname',`profile`='$fileName',`phone` = '$phone',`email`='$email',`password` = '$password' WHERE `id` = $Id");
 
     // $insert = mysqli_query($auth,"INSERT INTO products(productname,productdesc,productimage,productprice,stockstatus,quantity) VALUES ('".$name."','".$desc."', '".$fileName."','".$price."','".$check."','".$quan."')");
     if($insert){
        $outMessageorError = "The file ".$fileName. " has been uploaded successfully.";
     sleep(2);
-    header("location:products.php");
+    header("location:customer.php");
     }else{
        $outMessageorError = "Imaghe cant be uplaoded";
     }
@@ -231,11 +236,11 @@ if(!empty($_FILES["productimg"]["name"])){
     }
   }
   else if(empty($_FILES["productimg"]["name"])){
-    $insert = mysqli_query($auth,"UPDATE `products` SET `productname` = '$pname',`productdesc`='$pdesc',`productprice` = '$price',`stockstatus`='$check',`quantity` = '$quan',`last_modified`='$user_name' WHERE `id` = $Id");
+    $insert = mysqli_query($auth,"UPDATE `newuserdata` SET `name` = '$name',`username`='$uname',`phone` = '$phone',`email`='$email',`password` = '$password' WHERE `id` = $Id");
       if($insert){
         // $outMessageorError = "The file ".$fileName. " has been uploaded successfully.";
      sleep(2);
-     header("location:products.php");
+     header("location:customer.php");
      }
 
   }
@@ -243,7 +248,7 @@ if(!empty($_FILES["productimg"]["name"])){
 
     $outMessageorError = 'Please select a file to upload.';
   }
-    echo$outMessageorError;
+    echo $outMessageorError;
 
 
 }

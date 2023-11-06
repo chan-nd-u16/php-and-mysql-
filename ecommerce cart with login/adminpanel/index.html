@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main{
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            /* border: solid; */
+            align-items: center;
+        }
+        .inner{
+            height: 30vh;
+            margin-top: 15%;
+            /* width: 40vh; */
+            /* border: solid black ; */
+           
+           
+        
+        }
+        /* .main .inner .name{
+            padding-top: 30%;
+        } */
+        .main .inner .number,.button{
+            padding-top: 15%;
+            /* align-items: center; */
+            
+            
+        }
+       
+        .button{
+            display: flex;
+            justify-content: center;
+        }
+        .userbox{
+            display: flex;
+            justify-content: center;
+            height:40vh;
+            width: 50vh;
+            border: solid;
+            background-color: aquamarine;
+        }
+        input{
+            padding: 3%;
+            /* display: flex;
+            justify-content: center; */
+            /* font-size: 10px; */
+        }
+        button{
+            padding: 3%;
+            border-radius: 20px;
+            width: 80px;
+            background-color:pink;
+        }
+        .align{
+            display: block;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="align">
+        <div class="userbox">
+
+
+
+            <div class="inner">
+
+                    <div class="inn">
+
+                        <div class="name">
+                            <input type="text" placeholder="Enter Name:" id="name">
+
+                        </div>
+                        <div class="number">
+                            <input type="number" name="phone" id="ph" placeholder="Enter Phone Number:">
+                        </div>
+                        <div class="button">
+                            <button onclick="func()">Submit</button>
+                            
+                        </div>
+                       
+                        <!-- <div class="result">
+                            
+
+                        </div> -->
+                    </div>
+                   
+
+
+
+            </div>
+        </div>
+        <div class="res">
+            <h3 id="res"></h3>
+        </div>
+       
+    </div>
+    </div>
+   
+    
+</body>
+<script>
+function func(){
+    let name=document.querySelector('#name').value;
+    let num=document.querySelector('#ph').value;
+    let result=document.getElementById('res')
+
+    if(num.length==10){
+        
+        result.innerHTML=`Hi! ${name},You entered a valid  Phone number`;
+
+    }
+    else{
+        result.innerHTML=`Hi! ${name},You not  entered a valid Phone number`;
+    }
+    
+}
+
+
+
+</script>
+</html>

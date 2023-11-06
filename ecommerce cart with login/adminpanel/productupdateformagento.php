@@ -1,9 +1,7 @@
 <?php
 session_start();
-$user_name=$_SESSION['name'];
-  if(!isset($_SESSION['name'])){
-    header("location:adminlogin.php");
-  }
+// $user_name=$_SESSION['name'];
+
 
 
 ?>
@@ -235,7 +233,7 @@ if(!empty($_FILES["productimg"]["name"])){
       if($insert){
         // $outMessageorError = "The file ".$fileName. " has been uploaded successfully.";
      sleep(2);
-     header("location:products.php");
+     header("location:http://chandru.magento.com/display/productcrud/withpagefactory");
      }
 
   }

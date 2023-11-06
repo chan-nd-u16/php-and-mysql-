@@ -28,6 +28,7 @@
 
     </form>
     <div id="cat"></div>
+    <a href="adminpanel.php"class="btn btn-primary">Go to Admin</a>
     
     <table class="table table-striped" >
        <thead>
@@ -39,6 +40,8 @@
             <th>Phone</th>
             <th>Email</th>
             <th>password</th>
+            <th>Update</th>
+            <th>Delete</th>
                      
 
         </tr>
@@ -60,6 +63,9 @@
                     <td class="align-middle"><?php echo $one['phone'];?></td>
                     <td class="align-middle"><?php echo $one['email'];?></td>
                     <td class="align-middle"><?php echo $one['password'];?></td>
+                    <td class="align-middle"><a href="customerupdate.php?id=<?php print($one['id']);?>&name=<?php print($one['name']);?>&uname=<?php print($one['username']);?>&phone=<?php print($one['phone']);?>&email=<?php print($one['email']);?>&password=<?php print($one['password']);?>" class="btn btn-primary">update</a></td>
+                    <td class="align-middle"><a href="customerdelete.php?id=<?php print($one['id'])?>" class="btn btn-danger">Delete</a></td>
+
                     
                     
 

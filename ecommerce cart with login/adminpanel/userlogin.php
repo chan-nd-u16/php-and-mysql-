@@ -124,7 +124,7 @@
             <form method="post">
             
                 <div class="email"><i class="fa-solid fa-envelope fa-fade"></i><input type="email" name="email" id="" placeholder="Email " style="padding-left: 21px; " ></div>
-                <div class="password"><i class="fa-solid fa-lock fa-beat"></i><input type="text" name="password" id="" placeholder="Password" style="padding-left: 21px; "></div>
+                <div class="password"><i class="fa-solid fa-lock fa-beat"></i><input type="password" name="password" id="" placeholder="Password" style="padding-left: 21px; "></div>
                 <div class="buttons">
 
                 
